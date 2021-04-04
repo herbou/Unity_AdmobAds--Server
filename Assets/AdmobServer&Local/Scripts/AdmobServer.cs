@@ -26,9 +26,9 @@ public class AdmobServer : MonoBehaviour {
    IEnumerator GetData (string url) {
       UnityWebRequest request = UnityWebRequest.Get (url) ;
 
-      yield return request.Send () ;
+      yield return request.SendWebRequest () ;
 
-      if (!request.isError) {
+      if (!request.isNetworkError && !request.isHttpError) {
          AdUnits adUnits = JsonUtility.FromJson<AdUnits> (request.downloadHandler.text) ;
 
          AdmobServerAdUnits.AppId = adUnits.AppID ;
